@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LayoutCrash.MainPage">
+
+    <Grid>
+        <ScrollView
+                x:Name="ScrollView"
+                Grid.Column="0"
+                Orientation="Both">
+            <CollectionView WidthRequest="{Binding ExpectedWidth}" HorizontalOptions="StartAndExpand" ItemsSource="{Binding Jobs}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="{Binding ColCount}" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                                HeightRequest="102"
+                                HorizontalOptions="Start"
+                                BackgroundColor="LightGray"
+                                Padding="10,0,10,10"
+                                Stroke="Black"
+                                WidthRequest="200">
+                            <Grid RowDefinitions="20,*" ColumnDefinitions="*,40">
+                                <Label Grid.Row="0" Grid.Column="1">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding AssignedHours}" TextColor="Black"/>
+                                            <Span Text="/" />
+                                            <Span Text="{Binding HourLimit}" TextColor="Black"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <CollectionView Grid.Row="1"  Grid.ColumnSpan="2" Grid.Column="0" ItemsSource="{Binding AssignedTasks}" VerticalScrollBarVisibility="Never">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border
+                                                Stroke="Transparent"
+                                                BackgroundColor="Khaki"
+                                                StrokeShape="RoundRectangle 6">
+                                                <Grid RowDefinitions="10,*,*" ColumnDefinitions="6,*,30,6" ColumnSpacing="4">
+                                                    <BoxView Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Color="PaleVioletRed" />
+                                                    <Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
+                                                                FontAttributes="Bold"
+                                                                FontSize="14"
+                                                                HorizontalOptions="Start"
+                                                                Text="Work Item" />
+                                                    <Label Grid.Row="2" Grid.Column="1"
+                                                                FontSize="12" Margin="0,0,0,1"
+                                                                HorizontalOptions="Start"
+                                                                Text="Work item 2"
+                                                                />
+                                                    <Border Grid.Row="0" Grid.RowSpan="3"
+                                                            Grid.Column="2"
+                                                            StrokeShape="RoundRectangle 10" 
+                                                            WidthRequest="20" HeightRequest="20">
+                                                        <Label
+                                                            FontSize="11"
+                                                            HorizontalTextAlignment="Center"
+                                                            VerticalTextAlignment="Center"
+                                                            Text="{Binding Hours, StringFormat='{0}h'}"
+                                                        />
+                                                    </Border>
+                                                    <Image Grid.Row="0" Grid.Column="4"
+                                                            WidthRequest="10"
+                                                            HeightRequest="10"
+                                                            HorizontalOptions="End"
+                                                            Source="dotnet_bot.png"
+                                                            VerticalOptions="Start">
+                                                    </Image>
+                                                    <BoxView Grid.Row="1" Grid.Column="4" Grid.RowSpan="2"
+                                                            Margin="0,0,0,0"
+                                                            HorizontalOptions="End"
+                                                            VerticalOptions="FillAndExpand"
+                                                            WidthRequest="6"
+                                                            Color="YellowGreen" />
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </Grid>
+</ContentPage>
